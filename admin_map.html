@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata for responsive design and character setting -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page Title -->
+    <title>AgriConnect Map</title>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmp2CP6sxMNC912WtZYpCFe3P7i9P5qiU"></script>
+
+    <!-- Custom styles -->
+    <style>
+        /* General Style Reset */
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #68c268; /* Lime green background */
+            color: #000000; /* White text for better readability on lime green background */
+            padding: 20px;
+        }
+
+/* Header Image Style */
+#header-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Map and Info Panel Styles */
+#map {
+    height: 580px;
+    width: 75%;
+    float: left;
+}
+#info-panel {
+    height: 500px;
+    width: 25%;
+    float: right;
+    overflow: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Panel Content Styles */
+#info-panel {
+            height: 450px;
+            width: 25%;
+            float: right;
+            overflow: auto;
+            background-color: #89d577; /* Lighter background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+            border-left: 5px solid #4CAF50; /* Green accent border */
+            font-size: 22px; /* Larger font size for readability */
+        }
+
+        /* Styles for headings within the info panel */
+        .info-panel h4 {
+            color: #006400; /* Dark green color */
+            margin-bottom: 10px;
+            border-bottom: 2px solid #4CAF50; /* Green underline */
+            padding-bottom: 5px;
+        }
+
+        /* Styles for list within the info panel */
+.info-panel ul {
+    list-style: circle;
+    padding: 0;
+}
+
+.info-panel li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc; /* Light grey border for each item */
+    display: flex; /* Align items in a row */
+    align-items: right; /* Vertically center items */
+    font-family: 'PALATINO',serif; /* Formal and widely used font */
+    color: #333; /* Darker text for formality */
+}
+
+.info-panel li:last-child {
+    border-bottom: none;
+}
+
+.info-panel img {
+    margin-right: 17px; /* Increased space between image and text */
+    width: 24px; /* Adjust image size for uniformity */
+    height: 24px;
+}
+
+.info-panel h4 {
+    font-family: 'PALATINO', serif;
+    font-size: 13px; /* Slightly larger font size for headings */
+    font-weight: bold; /* Bold font for headings */
+    color: #006400; /* Deep green for headings */
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #4CAF50; /* Accent border for headings */
+}
+
+
+        /* Additional Responsive Design Adjustments */
+        @media (max-width: 768px) {
+            #info-panel {
+                width: 100%;
+                float: none;
+                margin-top: 20px;
+            }
+        }
+
+/* Form Control Styles */
+select.form-control {
+    width: 100%;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: rgb(255, 255, 255);
+    background-image: linear-gradient(to top, #f9f9f9, #ffffff); /* Subtle gradient */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+.centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px; /* Larger font size */
+        color: #33691e; /* Deep green color */
+        text-shadow: 1px 1px 2px #8bc34a; /* Subtle shadow for depth */
+        margin-bottom: 30px; /* More space below the header */
+        font-family: 'Arial', sans-serif; /* Change font family if needed */
+    }
+
+
+    /* Add a wrapper for the search button */
+.search-button-wrapper {
+    display: flex;
+    justify-content: flex-end; /* Aligns the button to the right */
+    margin-top: 10px; /* Add margin on top if needed */
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #277b2a;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #367c39;
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.btn-search {
+    padding: 4px 3px;
+    background-color: #277b2a; /* Green */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 5px;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    #map, #info-panel {
+        width: 100%;
+        float: none;
+        margin-bottom: 20px;
+    }
+}
+/* Legend Panel Styles */
+#legend-panel {
+    float: right; /* Float the legend to the right side */
+    width: 25%; /* Adjust width as needed */
+    padding: 10px;
+    margin-bottom: 10px; /* Space below the legend */
+    font-family: 'Georgia', serif;
+}
+
+#legend-panel h4 {
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 20px;
+}
+
+#legend-panel ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex; /* Arrange items in a row */
+    flex-wrap: wrap; /* Wrap items to next line if needed */
+    color: #ffffff;
+}
+
+#legend-panel li {
+    display: flex;
+    align-items: center;
+    margin-right: 5px; /* Space between each legend item */
+    margin-bottom: 5px; /* Space below each legend item */
+}
+
+.legend-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 5px; /* Space between icon and text */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #legend-panel {
+        float: none;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.custom-marker {
+    display: block; /* Show the marker */
+    position: absolute;
+    width: 20px; /* Smaller width */
+    height: 20px; /* Smaller height */
+    background-size: cover;
+    cursor: pointer;
+    border-radius: 50% 50% 50% 0; /* Rounded top */
+    transform: rotate(-45deg); /* Rotate to make a pointed tail */
+    border-color: #0b6e17 transparent; /* Tail color */
+}
+
+.custom-marker:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px; /* Position for the tail */
+    border-width: 5px 2.5px 0;
+    border-style: solid;
+    border-color: #0b6e17 transparent; /* Tail color */
+    transform: translateX(-50%);
+}
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Header Image -->
+    <!-- <img id="header-image" src="https://www.dropbox.com/scl/fi/dtpki3lvopthxbikadj2i/agri_icon.jpg?rlkey=clwb9ju08mx3yu56ljhwixox5&dl=1" alt="Header Image"> -->
+
+    <!-- Main Content -->
+    <h3>Agri Map</h3><hr><br>
+    <div class="centered-container">
+
+        <!-- Custom Marker Template (hidden initially) -->
+<div id="custom-marker" class="custom-marker"></div>
+
+
+    <!-- Crop Name Dropdown -->
+    <div class="form-control">
+        <div class="form-control">
+            <select name="crop-name" class="form-control" id="crop-name">
+                <!-- Dropdown options -->
+                <option value=""> Select crop name </option>
+                    <option value="Eggplant"> Eggplant (Talong) </option>
+                    <option value="Bitter Gourd"> Bitter Gourd (Ampalaya) </option>
+                    <option value="Okra"> Okra </option>
+                    <option value="Rice"> Rice (Bigas) </option>
+                    <option value="Corn"> Corn (Mais)</option>
+                    <option value="String Beans"> String Beans (Sitaw) </option>
+                    <option value="Squash"> Squash (Kalabasa)</option>
+                    <option value="Sweet Potato"> Sweet Potato (Kamote) </option>
+                    <option value="Tomato"> Tomato </option>
+                    <option value="Peppers"> Peppers (Sili) </option>
+                    <option value="Cabbage"> Cabbage (Repolyo) </option>
+                    <option value="Onion"> Onion (Sibuyas) </option>
+                    <option value="Garlic">Garlic (bawang) </option>
+                    <option value="Grapes"> Grapes (Ubas) </option>
+                    <option value="Banana"> Banana (Saging)</option>
+                    <option value="Papaya"> Papaya </option>
+                    <option value="Strawberry"> Strawberry </option>
+                    <option value="Melon"> Melon </option>
+            </select>
+
+    <!-- Crop Status Dropdown -->
+
+            <select name="crop-status" class="form-control" id="crop-status">
+                <!-- Dropdown options -->
+                <option value=""> Crop Status </option>
+                <option value="seedling"> Seedling </option>
+                <option value="sprouting"> Sprouting </option>
+                <option value="ripening"> Ripening </option>
+                <option value="harvesting"> Harvesting </option>
+                <option value="withered"> Withered </option>
+            </select>
+
+            <div class="search-button-wrapper">
+                <a class="btn btn-search" onclick="filterFarms()" role="button">Search</a>
+            </div>
+        </div> 
+    </div>
+
+    <!-- Search Button -->s
+
+    </div>
+
+    <!-- Map and Info Panel Containers -->
+    <a class='btn btn-primary btn-sm' href='/AgriConnectN/admin_page.php'> BACK </a><br><br>
+
+    <div id="legend-panel">
+        <h4>Crop Status Legend</h4>
+        <ul>
+          <img src="https://www.dropbox.com/scl/fi/7cmb9wpj2tu8y7e0zj32s/seedling.jpg?rlkey=f2soc6zsryqp55azm84nkf6ps&dl=1" alt="Seedling" class="legend-icon"/> Seedling</li>
+           <img src="https://www.dropbox.com/scl/fi/l3r3wxpeya3w7t6mre0la/sprouting.jpg?rlkey=exgigjj9q837nqeqaad4bc0hc&dl=1" alt="Sprouting" class="legend-icon"/> Sprouting</li>
+           <img src="https://www.dropbox.com/scl/fi/2zaocbu7n2hcmfdwthqwm/ripening.jpg?rlkey=xk4hs5v4d1bi0cr98dquhwy9r&dl=1" alt="Ripening" class="legend-icon"/> Ripening</li>
+           <img src="https://www.dropbox.com/scl/fi/ipkj4s92q4gfzyze998do/harvesting.jpg?rlkey=anvlghst546st6y38fb02rv94&dl=1" alt="Harvesting" class="legend-icon"/> Harvesting</li>
+          <img src="https://www.dropbox.com/scl/fi/x4e7j9twva3gg0o1cpt3k/withered.jpg?rlkey=44u61qxroyzv7z4sjvjypmmx7&dl=1" alt="Withered" class="legend-icon"/> Withered</li>
+        </ul>
+    </div>
+    <div id="map"></div>
+    
+    <div id="info-panel"></div>
+
+
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+
+    
+</body>
+</html>

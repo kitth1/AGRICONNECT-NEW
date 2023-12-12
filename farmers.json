@@ -1,0 +1,12 @@
+{
+    "status": "success",
+    "farmers": [
+        {
+            "ID": "1",
+            "farmer_n": "John Doe",
+            "sex": "Male",
+            "latitude": "10.8062",
+            "longitude": "122.5841"
+        }
+    ]
+}
