@@ -38,7 +38,7 @@ body, html {
 }
 
 .table th {
-    background-color: #4CAF50;
+    background-color: #006400;
     color: white;
     padding: 10px;
     border: 1px solid #ddd;
@@ -54,6 +54,10 @@ body, html {
     background-color: #f2f2f2;
 }
 
+.table tr:hover {
+    background-color: #ddd; /* Lighter grey background when hovered */
+}
+
 .btn {
     padding: 8px 16px;
     border: none;
@@ -67,14 +71,6 @@ body, html {
 
 .btn:hover {
     background-color: #449d44;
-}
-
-.btn-primary {
-    background-color: #007bff;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
 }
 
 .btn-sm {
@@ -111,7 +107,6 @@ h2 {
     }
 }
 </style>
-    </style>
 </head>
 <body>
     <div class="container my-5">

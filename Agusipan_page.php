@@ -39,7 +39,7 @@ body, html {
 }
 
 .table th {
-    background-color: #4CAF50;
+    background-color: #006400;
     color: white;
     padding: 10px;
     border: 1px solid #ddd;
@@ -53,6 +53,10 @@ body, html {
 
 .table tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #ddd; /* Lighter grey background when hovered */
 }
 
 .btn {
@@ -70,14 +74,6 @@ body, html {
     background-color: #449d44;
 }
 
-.btn-primary {
-    background-color: #007bff;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
 .btn-sm {
     padding: 5px 10px;
     font-size: 0.875rem;
@@ -89,6 +85,7 @@ body, html {
     margin: 0.5rem 0;
     align-self: flex-start; /* Aligns the button to the start of the flex item line */
 }
+
 
 /* This will center the content and restrict the table's width */
 .table-container {
