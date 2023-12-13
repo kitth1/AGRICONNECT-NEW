@@ -125,7 +125,7 @@ function insertTechnician($conn, $tname, $age, $sex, $tcontact, $tdesignation, $
 }
 
     .form-container {
-    background: #ffffff; /* A solid white background */
+    background-color: #E5FDE6;
     padding: 40px; /* More padding for better spacing */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
@@ -371,9 +371,9 @@ select.form-control:focus {
                 </div> 
             </div>
             <div class="row mb-3">
-                <div class="button-container">
+                <div class="btn container">
                 <div class="offset-sm-3 col-sm-3 d-grid">
-                <input type="submit" name="submit" value="submit" class="form-btn">
+                <input type="submit" name="submit" value="submit" class="btn form-btn">
                     <a class="btn btn-cancel" href="/AgriConnectN/user_profile.php" role="button"> Cancel </a>
                     </div>
                 </div>
@@ -430,7 +430,7 @@ select.form-control:focus {
     echo "<td>" . htmlspecialchars($row['role']) . "</td>";
     echo "<td>" . htmlspecialchars($row['tech_username']) . "</td>";   
     echo "<td>";
-    echo "<div class=\"button-container\">";
+    echo "<div class=\"btn container\">";
     echo "<a class=\"btn update\" href=\"/AgriConnectN/update_user_profile.php?ID=" . htmlspecialchars($row['ID']) . "\">Update</a>";
     echo "<a class=\"btn delete\" href=\"/AgriConnectN/delete_tech_acc.php?ID=" . htmlspecialchars($row['ID']) . "\">Delete</a>";
     echo "</div>";
