@@ -177,6 +177,7 @@ h2 {
     .col-label {
         margin-bottom: 0.5rem;
     }
+   
 }
     .btn-submit {
         width: 30%;
@@ -206,6 +207,26 @@ h2 {
         transition: background-color 0.2s ease-in-out;
         }
 
+    .btn-search {
+        width: 15%;
+        padding: 5px;
+        border: none;
+        border-radius: 1px;
+        color: #fff;
+        font-size: 16px; /* Adjust font size as needed */
+        cursor: pointer;
+        text-decoration: none; /* Remove underline for Cancel link */
+        display: inline-block; /* Adjust display */
+        text-align: center;
+        transition: background-color 0.2s ease-in-out;
+        }
+
+        .btn-search {
+            background-color: #28a745; /* Green color for Submit button */
+            
+        }
+
+
         .btn-submit {
             background-color: #28a745; /* Green color for Submit button */
             
@@ -220,7 +241,8 @@ h2 {
         }
 
 .btn-submit,
-.btn-cancel {
+.btn-cancel,
+.btn-search {
     margin-left: 10px; /* Add space between buttons */
 }
 
@@ -384,7 +406,7 @@ h2 {
 
         
 <!-- Barangay Dropdown -->
-<div class="row mb-3">
+<div class="row mb-3"><br>
     <label class="col-sm-3 col-form-label">Select Barangay</label>
     <div class="col-sm-6">
         <select id="barangay_location" class="form-control">
@@ -405,11 +427,11 @@ h2 {
     </div>
 </div>
 
-<!-- Map -->
+<!-- Map
 <div id="map" style="height: 400px; width: 100%;"></div>
 <input type="hidden" name="latitude" id="latitude">
 <input type="hidden" name="longitude" id="longitude">
-    </div>
+    </div> -->
 </div>
 </div>
         </form>
