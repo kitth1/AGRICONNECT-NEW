@@ -100,8 +100,52 @@
             border: 1px solid black;
             padding: 5px;
         }
+        .search-bar {
+            display: none;
+        }
     }
 </style>
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc"; 
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;      
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
+
 
 </head>
 <body>
@@ -109,8 +153,13 @@
         <h2>Admin Report</h2>
         <a href="admin_page.php" class="btn no-print">Cancel</a>  
         <button class="no-print" onclick="window.print()">Print Report</button>
-        <br>
+        <br><br>
         <table class="table" border="1">
+            
+        <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search by farm or crop name...">
+                <button onclick="searchTable()">Search</button>
+            </div>
             <thead>
                 <tr>
                     <th>FARMER NAME</th>
@@ -171,5 +220,35 @@
             </tbody>
         </table>
     </div>
+
+            <script>
+       function searchTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search-input");
+    filter = input.value.toUpperCase();
+    table = document.querySelector(".table");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 1; i < tr.length; i++) { // Start from 1 to skip table header
+        var rowContainsFilter = false;
+
+        // Check for Farmer Name (Column 0), Barangay (Column 5), and Crop Status (Column 8)
+        for (var columnIndex of [0, 5, 8]) {
+            td = tr[i].getElementsByTagName("td")[columnIndex];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    rowContainsFilter = true;
+                    break; // Stop checking other columns if a match is found
+                }
+            }
+        }
+
+        tr[i].style.display = rowContainsFilter ? "" : "none";
+    }
+}
+
+    </script>
 </body>
 </html>
