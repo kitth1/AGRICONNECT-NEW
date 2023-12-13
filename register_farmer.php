@@ -68,6 +68,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $checkStmt->close();
     }
 }
+            // PHP code to fetch barangay names and coordinates from brgy_location table
+$barangayData = [];
+$sql = "SELECT barangay_location, lat, lng FROM brgy_location";
+$result = $conn->query($sql);
+while($row = $result->fetch_assoc()) {
+    $barangayData[] = $row;
+}
+
 
 $conn->close();
 ?>
@@ -332,6 +340,7 @@ h2 {
                 </div> 
             </div>
 
+
             <script>
     var map;
     var marker;
@@ -349,25 +358,57 @@ h2 {
             draggable: true
         });
 
-        // Update hidden input on marker drag
         google.maps.event.addListener(marker, 'dragend', function() {
             document.getElementById('latitude').value = marker.getPosition().lat();
             document.getElementById('longitude').value = marker.getPosition().lng();
         });
+
+        document.getElementById('searchBarangay').addEventListener('click', function() {
+            var selectedBarangay = JSON.parse(document.getElementById('barangay_location').value);
+            if (selectedBarangay) {
+                var newLocation = new google.maps.LatLng(selectedBarangay.lat, selectedBarangay.lng);
+                map.setCenter(newLocation);
+                marker.setPosition(newLocation);
+                document.getElementById('lat').value = selectedBarangay.latitude;
+                document.getElementById('lng').value = selectedBarangay.longitude;
+            }
+        });
     }
 </script>
+
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmp2CP6sxMNC912WtZYpCFe3P7i9P5qiU&callback=initMap&libraries=places" async defer></script>
             
             <div id="map" style="height: 400px; width: 100%;"></div>
-            <input type="hidden" name="latitude" id="latitude">
-            <input type="hidden" name="longitude" id="longitude">
+            <input type="hidden" name="lat" id="lat">
+            <input type="hidden" name="lng" id="lng">
 
-
-            <br>
-            <div class="row mb-3">
+        
+<!-- Barangay Dropdown -->
+<div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Select Barangay</label>
+    <div class="col-sm-6">
+        <select id="barangay_location" class="form-control">
+            <option value="">Select Barangay</option>
+            <?php foreach ($barangayData as $barangay): ?>
+                <option value="<?= htmlspecialchars(json_encode($barangay)) ?>"><?= htmlspecialchars($barangay['barangay_location']) ?></option>
+            <?php endforeach; ?>
+        </select>
+        <div class="col-sm-3">
+        <button type="button" id="searchBarangay" class="btn btn-search">Search</button>
+    </div>
+</div>
+    </div>
+    <div class="row mb-3">
     <div class="col-sm-6 offset-sm-3 d-grid gap-2 d-md-flex justify-content-md-end">
         <input type="submit" name="submit" value="Submit" class="btn btn-submit">
         <a class="btn btn-cancel" href="/AgriConnectN/admin_page.php" role="button">Cancel</a>
+    </div>
+</div>
+
+<!-- Map -->
+<div id="map" style="height: 400px; width: 100%;"></div>
+<input type="hidden" name="latitude" id="latitude">
+<input type="hidden" name="longitude" id="longitude">
     </div>
 </div>
 </div>
