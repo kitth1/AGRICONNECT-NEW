@@ -15,6 +15,33 @@ function initMap() {
     fetchStatusIcons();
 }
 
+// Function to add a marker to the map
+function addMarker(farmer) {
+    var position = new google.maps.LatLng(farmer.latitude, farmer.longitude);
+    var iconUrl = getIconForCropStatus(farmer.crop_status);
+
+    // Custom icon size and other properties for a smaller, more formal design
+    var icon = {
+        url: iconUrl, // URL of the image
+        scaledSize: new google.maps.Size(20, 20), // Size of the marker
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(10, 10) // Anchor point for the marker
+    };
+
+    var marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        title: farmer.farm_n,
+        icon: icon
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+        showFarmerDetails(farmer.ID);
+    });
+
+    markers.push(marker);
+}
+
 // Fetch status icons from the server
 function fetchStatusIcons() {
     fetch('get_icons.php')
@@ -50,48 +77,6 @@ function clearMarkers() {
     markers = [];
 }
 
-function createCustomMarker(iconUrl) {
-    var markerDiv = document.createElement('div');
-    markerDiv.className = 'custom-marker';
-    markerDiv.style.backgroundImage = 'url(' + iconUrl + ')';
-    return markerDiv;
-}
-
-
-// Function to add a marker to the map
-function addMarker(farmer) {
-    var position = new google.maps.LatLng(farmer.latitude, farmer.longitude);
-    var iconUrl = getIconForCropStatus(farmer.crop_status); // Get icon based on status
-    var customMarkerElement = createCustomMarker(iconUrl);
-
-    var overlay = new google.maps.OverlayView();
-    overlay.onAdd = function() {
-        var layer = this.getPanes().overlayLayer;
-        layer.appendChild(customMarkerElement);
-
-        overlay.draw = function() {
-            var projection = this.getProjection();
-            var pixel = projection.fromLatLngToDivPixel(position);
-            customMarkerElement.style.left = pixel.x + 'px';
-            customMarkerElement.style.top = pixel.y + 'px';
-        };
-    };
-
-    var marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        title: farmer.farm_n,
-        icon: iconUrl
-    });
-
-    // Event listener for each marker
-    google.maps.event.addListener(marker, 'click', function() {
-        showFarmerDetails(farmer.ID);
-    });
-
-    markers.push(marker);
-}
-
 // Get the appropriate icon for a given crop status
 function getIconForCropStatus(crop_status) {
     return statusIcons[crop_status] || statusIcons['default']; 
@@ -119,6 +104,7 @@ function showFarmerDetails(farmerID) {
     }
 }
 
+
 // Function to refresh and display markers based on the latest data
 function refreshMarkers() {
     clearMarkers();
@@ -130,51 +116,19 @@ function filterFarms() {
     var cropName = document.getElementById('crop-name').value.toLowerCase();
     var cropStatus = document.getElementById('crop-status').value.toLowerCase();
 
-    var filteredFarmers = Object.values(farmersData).filter(farmer => 
-        farmer.crop_name.toLowerCase().includes(cropName) && 
-        farmer.crop_status.toLowerCase().includes(cropStatus)
-    );
+    clearMarkers(); // Clear existing markers
 
-    clearMarkers();
-    filteredFarmers.forEach(addMarker);
+    for (var farmerID in farmersData) {
+        var farmer = farmersData[farmerID];
+        var matchesCropName = !cropName || farmer.crop_name.toLowerCase() === cropName;
+        var matchesCropStatus = !cropStatus || farmer.crop_status.toLowerCase() === cropStatus;
+
+        if (matchesCropName && matchesCropStatus) {
+            addMarker(farmer);
+        }
+    }
 }
 
-// Modified createCustomMarker function
-function createCustomMarker(iconUrl, size, shape) {
-    var markerDiv = document.createElement('div');
-    markerDiv.className = 'custom-marker ' + shape; // Apply shape class
-    markerDiv.style.backgroundImage = 'url(' + iconUrl + ')';
-    markerDiv.style.width = size.width + 'px';
-    markerDiv.style.height = size.height + 'px';
-    return markerDiv;
-}
 
-// Modified addMarker function
-function addMarker(farmer) {
-    var position = new google.maps.LatLng(farmer.latitude, farmer.longitude);
-    var iconUrl = getIconForCropStatus(farmer.crop_status);
-
-    // Customize size and shape based on your requirement
-    var customMarkerElement = createCustomMarker(iconUrl, { width: 30, height: 30 }, 'pointer');
-
-    var overlay = new google.maps.OverlayView();
-    overlay.onAdd = function() {
-        var layer = this.getPanes().overlayMouseTarget;
-        layer.appendChild(customMarkerElement);
-
-        overlay.draw = function() {
-            var projection = this.getProjection();
-            var pixel = projection.fromLatLngToDivPixel(position);
-            customMarkerElement.style.left = (pixel.x - 10) + 'px'; // Centering the marker
-            customMarkerElement.style.top = (pixel.y - 10) + 'px';
-        };
-    };
-    overlay.setMap(map);
-
-    // Event listener for custom marker
-    google.maps.event.addDomListener(customMarkerElement, 'click', function() {
-        showFarmerDetails(farmer.ID);
-    });
-}
 
 window.onload = initMap;
