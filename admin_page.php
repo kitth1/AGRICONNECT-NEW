@@ -139,6 +139,10 @@ body, html {
     background-color: #f2f2f2;
 }
 
+.table tr:hover {
+    background-color: #ddd; /* Lighter grey background when hovered */
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -188,7 +192,11 @@ body, html {
     text-decoration: none;
     margin-right: 5px;
 }
-
+/* Additional hover effect for buttons */
+.btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+    transform: translateY(-2px); /* Slightly raise the button on hover */
+}
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .sidebar {
@@ -228,7 +236,7 @@ body, html {
 
         <div class="search-bar">
                 <input type="text" id="search-input" placeholder="Search by farm or crop name...">
-                <button onclick="searchTable()">Search</button>
+                 <button type="submit" class="btn btn-search" onclick="searchTable()">Search</button>
             </div>
         <div style="text-align: right; margin-bottom: 20px;">
             <a href="/AgriConnectN/admin_report_ff.php" class="btn">Print Report</a>
