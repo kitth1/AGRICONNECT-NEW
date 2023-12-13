@@ -52,6 +52,45 @@ body, html {
     padding-bottom: 80px; /* Spacing below the Admin title */
 }
 
+/* Styles for the search bar container */
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff; /* White background for the search bar */
+    padding: 8px 12px;
+    border-radius: 20px; /* Rounded corners for the search bar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* subtle shadow for depth */
+    margin-bottom: 20px; /* Space below the search bar */
+    width: 100%; /* Full width */
+    max-width: 400px; /* Maximum width of the search bar */
+}
+
+/* Styles for the search input field */
+#search-input {
+    border: none;
+    display: inline-block;
+    padding: 10px 15px;
+    outline: none;
+    flex-grow: 1; /* Takes up available space */
+    margin-right: 10px; /* Space between input and button */
+    font-size: 16px; /* Font size */
+}
+
+/* Styles for the search button */
+.search-bar button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-right: px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #5cb85c; /* Bootstrap's btn-success color */
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
 /* Main content styles */
 .main-content {
     margin-left: 200px; /* Equal to sidebar width */
@@ -185,7 +224,7 @@ body, html {
     </div>
     <div class="main-content">
     <div class="dashboard-box">
-        <h2>Dashboard</h2>
+        <h2>Dashboard</h2><br>
 
         <div class="search-bar">
                 <input type="text" id="search-input" placeholder="Search by farm or crop name...">
