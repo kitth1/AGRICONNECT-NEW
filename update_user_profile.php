@@ -21,6 +21,9 @@
     $password="";
     $confirm_pass="";
 
+    $errorMessage="";
+    $successMessage="";
+
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         if (!isset($_GET["ID"])) {
@@ -109,8 +112,9 @@
         $stmt->bind_param("sssssssssi", $tname, $age, $sex, $tcontact, $tdesignation, $role, $tech_username, $password, $confirm_pass, $ID);
     
         if ($stmt->execute()) {
+            echo ("Updated successfully!");
             header('location:user_profile.php');
-            exit;
+                exit;
         } else {
             echo 'Error updating account: ' . $conn->error;
         }
@@ -138,9 +142,9 @@ body {
 
 .container {
     max-width: 600px;
-    margin: 2rem auto;
+    margin: auto;
     padding: 2rem;
-    background-color: #fff;
+    background-color: #E5FDE6;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -151,145 +155,126 @@ h2 {
     margin-bottom: 1rem;
 }
 
-.form-control {
-    width: 100%;
+.form-control, .form-select {
+    width:100%;
     padding: 10px;
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-select.form-control {
-    -webkit-appearance: none; /* Removes default Chrome and Safari style */
-    -moz-appearance: none; /* Removes default style Firefox */
-    appearance: none; /* Removes default style for IE */
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 1rem;
-    font-size: 16px;
-    line-height: 1.25;
-    color: #444;
-    background-color: #fff;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="12px" height="12px" viewBox="0 0 4 5" xmlns="http://www.w3.org/2000/svg" fill="%23aaa"><path d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>'); /* Custom arrow */
-    background-repeat: no-repeat;
-    background-position: right 10px center;
     border: 1px solid #ccc;
     border-radius: 4px;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-select.form-control:focus {
-    border-color: #66afe9;
-    outline: 0;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-}
-
-.select-wrapper {
-    position: relative;
-    display: block;
-    width: 100%;
-    margin-bottom: 1rem;
-}
-
-.select-wrapper::after {
-    content: "";
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #888;
-    pointer-events: none;
-}
-
-select.form-control {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    padding-right: 30px; /* Make space for the arrow */
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px 15px;
     font-size: 16px;
-    line-height: 1.5;
-    color: #444;
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
 
 .form-btn {
     width: 100%;
-    padding: 10px 0;
+    max-width: 400px;
+    padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #008cba;
-    color: white;
+    color: #fff;
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }
 
-.form-btn:hover {
-    background-color: #007ba7;
+.btn-submit {
+    background-color: #007bff;
 }
 
-.btn.btn-outline-primary {
-    border: 1px solid #008cba;
-    background-color: transparent;
-    color: #008cba;
-    padding: 10px 0;
-    text-decoration: none;
-    text-align: center;
-    display: block;
-    transition: all 0.2s ease-in-out;
+.btn-cancel {
+    background-color: #6c757d;
 }
 
-.btn.btn-outline-primary:hover {
-    background-color: #008cba;
-    color: white;
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.btn-cancel:hover {
+    background-color: #5a6268;
 }
 
 .row {
+    display: block;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.col-label {
+    flex: 0 0 100%;
+    width: 25%;
+    text-align: left;
+    padding-right: 10px;
+    align-self: center;
+}
+
+.col-input {
+    flex: 0 0 100%;
+}
+
+@media screen and (max-width: 576px) {
+    .col-label, .col-input {
+        width: 100%;
+        text-align: left;
+    }
+    .col-label {
+        margin-bottom: 0.5rem;
+    }
+}
+    .btn-submit {
+        width: 30%;
+        padding: 11px;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px; /* Adjust font size as needed */
+        cursor: pointer;
+        text-decoration: none; /* Remove underline for Cancel link */
+        display: inline-block; /* Adjust display */
+        text-align: center;
+        transition: background-color 0.2s ease-in-out;
+        }
+
+    .btn-cancel {
+        width: 30%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 15px; /* Adjust font size as needed */
+        cursor: pointer;
+        text-decoration: none; /* Remove underline for Cancel link */
+        display: inline-block; /* Adjust display */
+        text-align: center;
+        transition: background-color 0.2s ease-in-out;
+        }
+
+        .btn-submit {
+            background-color: #28a745; /* Green color for Submit button */
+            
+        }
+
+.btn-cancel {
+            background-color: #d9534f; /* Darker shade for Cancel button */
+}
+
+    .btn-submit:hover {
+    background-color: #218838; /* Darker shade for hover effect */
+}
+
+.btn-submit,
+.btn-cancel {
+    margin-left: 10px; /* Add space between buttons */
+}
+
+.btn-cancel:hover {
+    background-color: #BE4643; /* Darker shade for hover effect */
+}
+
+        /* Additional styles for the button wrapper */
+.button-wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center; /* Align buttons to the center */
+    margin-top: 20px; /* Add some space on top of the buttons */
 }
-
-.col-sm-3, .col-sm-6 {
-    flex-basis: 100%;
-}
-
-@media screen and (min-width: 768px) {
-    .col-sm-3, .col-sm-6 {
-        flex-basis: calc(50% - 20px);
-    }
-
-    .col-sm-3 {
-        flex-basis: 25%;
-    }
-
-    .offset-sm-3 {
-        margin-left: 25%;
-    }
-}
-
-.d-grid {
-    display: grid;
-    gap: 10px;
-}
-
-@media screen and (min-width: 576px) {
-    .d-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
     </style>
 </head>
 <body>
@@ -317,7 +302,7 @@ select.form-control {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">sex</label>
                 <div class="select-wrapper">
-                <select name="sex" class="form=control" required value="<?php echo $sex; ?>"><br>
+                <select name="sex" class="form-control" required value="<?php echo $sex; ?>"><br>
                     <option value=""> choose sex </option>
                     <option value="male"> male </option>
                     <option value="female"> female </option>
@@ -333,7 +318,7 @@ select.form-control {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Barangay Designation</label>
                 <div class="select-wrapper">
-                <select name="tdesignation" class="form=control"  required value="<?php echo $tdesignation; ?>"><br>
+                <select name="tdesignation" class="form-control"  required value="<?php echo $tdesignation; ?>"><br>
                     <option value=""> choose barangay </option>
                     <option value="Agusipan"> Agusipan </option>
                     <option value="Agutayan"> Agutayan </option>
@@ -346,7 +331,7 @@ select.form-control {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Role</label>
                 <div class="select-wrapper">
-                <select name="role" class="form=control"  required value="<?php echo $role; ?>"><br>
+                <select name="role" class="form-control"  required value="<?php echo $role; ?>"><br>
                     <option value=""> choose role </option>
                     <option value="admin"> Admin </option>
                     <option value="technician"> Technician </option>
@@ -371,14 +356,12 @@ select.form-control {
                 <input type="text" class="form-control" name="confirm_pass" required value="<?php echo $confirm_pass; ?>">
                 </div> 
             </div>
-            <br>
             <div class="row mb-3">
-                <div class="offset-sm-3 col-sm-3 d-grid">
-                <input type="submit" name="submit" value="submit" class="form-btn">
-                </div>
-                <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/AgriConnectN/user_profile.php" role="button"> Cancel </a>
-                </div>
+            <div class="offset-sm-3 col-sm-6 d-grid">
+            <div class="button-wrapper">
+    <input type="submit" name="submit" value="Submit" class="btn btn-submit">
+    <a class="btn btn-cancel" href="/AgriConnectN/user_profile.php"  role="button">Cancel</a>
+    </div>
             </div>
         </form>
     </div>

@@ -43,17 +43,6 @@ body {
     width: 75%;
     float: left;
 }
-#info-panel {
-    height: 500px;
-    width: 25%;
-    float: right;
-    overflow: auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 /* Info Panel Content Styles */
 #info-panel {
             height: 450px;
@@ -61,8 +50,7 @@ body {
             float: right;
             overflow: auto;
             background-color: #89d577; /* Lighter background */
-            padding: 20px;
-            border-radius: 8px;
+            padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
             border-left: 5px solid #4CAF50; /* Green accent border */
             font-size: 22px; /* Larger font size for readability */
@@ -264,15 +252,6 @@ select.form-control {
     transform: translateX(-50%);
 }
 
-
-
-
-
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -284,7 +263,7 @@ select.form-control {
     <div class="centered-container">
 
         <!-- Custom Marker Template (hidden initially) -->
-<div id="custom-marker" class="custom-marker"></div>
+<!-- <div id="custom-marker" class="custom-marker"></div> -->
 
 
     <!-- Crop Name Dropdown -->
@@ -341,11 +320,11 @@ select.form-control {
     <div id="legend-panel">
         <h4>Crop Status Legend</h4>
         <ul>
-          <img src="https://www.dropbox.com/scl/fi/7cmb9wpj2tu8y7e0zj32s/seedling.jpg?rlkey=f2soc6zsryqp55azm84nkf6ps&dl=1" alt="Seedling" class="legend-icon"/> Seedling</li>
-           <img src="https://www.dropbox.com/scl/fi/l3r3wxpeya3w7t6mre0la/sprouting.jpg?rlkey=exgigjj9q837nqeqaad4bc0hc&dl=1" alt="Sprouting" class="legend-icon"/> Sprouting</li>
-           <img src="https://www.dropbox.com/scl/fi/2zaocbu7n2hcmfdwthqwm/ripening.jpg?rlkey=xk4hs5v4d1bi0cr98dquhwy9r&dl=1" alt="Ripening" class="legend-icon"/> Ripening</li>
-           <img src="https://www.dropbox.com/scl/fi/ipkj4s92q4gfzyze998do/harvesting.jpg?rlkey=anvlghst546st6y38fb02rv94&dl=1" alt="Harvesting" class="legend-icon"/> Harvesting</li>
-          <img src="https://www.dropbox.com/scl/fi/x4e7j9twva3gg0o1cpt3k/withered.jpg?rlkey=44u61qxroyzv7z4sjvjypmmx7&dl=1" alt="Withered" class="legend-icon"/> Withered</li>
+          <img src="https://www.dropbox.com/scl/fi/7cmb9wpj2tu8y7e0zj32s/seedling.jpg?rlkey=f2soc6zsryqp55azm84nkf6ps&raw=1" alt="Seedling" class="legend-icon"/> Seedling</li>
+           <img src="https://www.dropbox.com/scl/fi/l3r3wxpeya3w7t6mre0la/sprouting.jpg?rlkey=exgigjj9q837nqeqaad4bc0hc&raw=1" alt="Sprouting" class="legend-icon"/> Sprouting</li>
+           <img src="https://www.dropbox.com/scl/fi/2zaocbu7n2hcmfdwthqwm/ripening.jpg?rlkey=xk4hs5v4d1bi0cr98dquhwy9r&raw=1" alt="Ripening" class="legend-icon"/> Ripening</li>
+           <img src="https://www.dropbox.com/scl/fi/ipkj4s92q4gfzyze998do/harvesting.jpg?rlkey=anvlghst546st6y38fb02rv94&raw=1" alt="Harvesting" class="legend-icon"/> Harvesting</li>
+          <img src="https://www.dropbox.com/scl/fi/x4e7j9twva3gg0o1cpt3k/withered.jpg?rlkey=44u61qxroyzv7z4sjvjypmmx7&raw=1" alt="Withered" class="legend-icon"/> Withered</li>
         </ul>
     </div>
     <div id="map"></div>

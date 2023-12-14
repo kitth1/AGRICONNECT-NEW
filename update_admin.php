@@ -93,7 +93,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Farmer</title>
     <style>
-
 * {
     margin: 0;
     padding: 0;
@@ -110,7 +109,7 @@ body {
     max-width: 600px;
     margin: auto;
     padding: 2rem;
-    background-color: #fff;
+    background-color: #E5FDE6;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -121,93 +120,125 @@ h2 {
     margin-bottom: 1rem;
 }
 
-.form-control {
-    width: calc(100% - 22px); /* accounting for padding and borders */
+.form-control, .form-select {
+    width:100%;
     padding: 10px;
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
 }
 
 .form-btn {
-    padding: 10px 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #008cba;
-    color: white;
+    color: #fff;
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }
 
-.form-btn, .btn-outline-primary {
-    padding: 10px 20px; /* Padding inside the buttons */
-    margin: 0 5px; /* Space around buttons */
+.btn-submit {
+    background-color: #007bff;
 }
 
-.form-btn:hover {
-    background-color: #007ba7;
+.btn-cancel {
+    background-color: #6c757d;
 }
 
-.btn.btn-outline-primary {
-    border: 1px solid #008cba;
-    background-color: transparent;
-    color: #008cba;
-    padding: 10px 0;
-    text-decoration: none;
-    text-align: center;
-    display: block;
-    transition: all 0.2s ease-in-out;
+.btn-submit:hover {
+    background-color: #0056b3;
 }
 
-.btn.btn-outline-primary:hover {
-    background-color: #008cba;
-    color: white;
+.btn-cancel:hover {
+    background-color: #5a6268;
 }
 
 .row {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
-    gap: 10px;
     margin-bottom: 1rem;
 }
 
-.row .col-sm-3,
-.row .col-sm-6,
-.row .col-sm-9 {
-    flex: 1; /* Make the columns flexible */
-    min-width: 120px; /* Give a minimum width to the columns */
+.col-label {
+    flex: 0 0 100%;
+    width: 25%;
+    text-align: left;
+    padding-right: 10px;
+    align-self: center;
 }
 
-/* Media query for larger screens, if you want to change the button layout on desktop */
-@media screen and (min-width: 576px) {
-    .d-grid {
-        flex-direction: row; /* align buttons in a row for larger screens */
-        justify-content: center; /* center the buttons container */
-    }
-    .form-btn,
-    .btn.btn-outline-primary {
-        width: auto; /* allow the buttons to fit content */
-    }
-}
-
-
-.d-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Creates two columns with equal width */
-    gap: 10px; /* Spacing between grid items */
+.col-input {
+    flex: 0 0 100%;
 }
 
 @media screen and (max-width: 576px) {
-    .d-grid {
-        flex-direction: column; /* Stack buttons vertically on smaller screens */
+    .col-label, .col-input {
+        width: 100%;
+        text-align: left;
     }
+    .col-label {
+        margin-bottom: 0.5rem;
+    }
+}
+    .btn-submit {
+        width: 30%;
+        padding: 11px;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px; /* Adjust font size as needed */
+        cursor: pointer;
+        text-decoration: none; /* Remove underline for Cancel link */
+        display: inline-block; /* Adjust display */
+        text-align: center;
+        transition: background-color 0.2s ease-in-out;
+        }
 
-    .form-btn, .btn-outline-primary {
-        width: 100%; /* Full width for smaller screens */
-        margin: 5px 0; /* Space above and below buttons */
-    }
+    .btn-cancel {
+        width: 30%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 15px; /* Adjust font size as needed */
+        cursor: pointer;
+        text-decoration: none; /* Remove underline for Cancel link */
+        display: inline-block; /* Adjust display */
+        text-align: center;
+        transition: background-color 0.2s ease-in-out;
+        }
+
+        .btn-submit {
+            background-color: #28a745; /* Green color for Submit button */
+            
+        }
+
+.btn-cancel {
+            background-color: #d9534f; /* Darker shade for Cancel button */
+}
+
+    .btn-submit:hover {
+    background-color: #218838; /* Darker shade for hover effect */
+}
+
+.btn-submit,
+.btn-cancel {
+    margin-left: 10px; /* Add space between buttons */
+}
+
+.btn-cancel:hover {
+    background-color: #BE4643; /* Darker shade for hover effect */
+}
+
+        /* Additional styles for the button wrapper */
+.button-wrapper {
+    display: flex;
+    justify-content: center; /* Align buttons to the center */
+    margin-top: 20px; /* Add some space on top of the buttons */
 }
     </style>
 </head>
@@ -233,7 +264,7 @@ h2 {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">sex</label>
                 <div class="col-sm-6">
-                <select name="sex" class="form=control" required value="<?php echo $sex; ?>"><br>
+                <select name="sex" class="form-control" required value="<?php echo $sex; ?>"><br>
                     <option value="male"> male </option>
                     <option value="female"> female </option>
                         </select><br>
@@ -254,7 +285,7 @@ h2 {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Barangay</label>
                 <div class="col-sm-6">
-                <select name="barangay" class="form=control"  required value="<?php echo $barangay; ?>"><br>
+                <select name="barangay" class="form-control"  required value="<?php echo $barangay; ?>"><br>
                     <option value="Agusipan"> Agusipan </option>
                     <option value="Agutayan"> Agutayan </option>
                     <option value="Bagumbayan"> Bagumbayan </option>
@@ -272,7 +303,7 @@ h2 {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Crop Name</label>
                 <div class="col-sm-6">
-                <select name="crop_name" class="form=control"  value="<?php echo $crop_name; ?>"><br>
+                <select name="crop_name" class="form-control"  value="<?php echo $crop_name; ?>"><br>
                 <option value=""> select crop name </option>
                     <option value="Eggplant"> Eggplant (Talong) </option>
                     <option value="Bitter Gourd"> Bitter Gourd (Ampalaya) </option>
@@ -298,7 +329,7 @@ h2 {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Crop Status</label>
                 <div class="col-sm-6">
-                <select name="crop_status" class="form=control"  value="<?php echo $crop_status; ?>"><br>
+                <select name="crop_status" class="form-control"  value="<?php echo $crop_status; ?>"><br>
                     <option value="seedling"> seedling </option>
                     <option value="sprouting"> sprouting </option>
                     <option value="ripening"> ripening </option>
@@ -313,14 +344,12 @@ h2 {
                 <input type="date" class="form-control" name="last_update" required placeholder="" value="<?php echo $last_update; ?>">
                 </div> 
             </div>
-            <br>
             <div class="row mb-3">
             <div class="offset-sm-3 col-sm-6 d-grid">
-            <input type="submit" name="submit" value="Submit" class="form-btn login-btn">
-            <a class="form-btn cancel-btn" href="/AgriConnectN/admin_page.php" role="button">Cancel</a>
-                </div>
-            </div>
-        </form>
+            <div class="button-wrapper">
+    <input type="submit" name="submit" value="Submit" class="btn btn-submit">
+    <a class="btn btn-cancel" href="/AgriConnectN/admin_page.php" role="button">Cancel</a>
+    </div>
     </div>
 
 </body>

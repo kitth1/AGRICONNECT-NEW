@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "A farm with the name '$farm_n' is already registered.";
         } else {
             // Farm name is unique, proceed with insertion
-            $stmt = $conn->prepare("INSERT INTO farmer_acc (farmer_n, age, sex, farm_n, area, barangay, fcontact, crop_name, crop_status, last_update, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssssssssss", $farmer_n, $age, $sex, $farm_n, $area, $barangay, $fcontact, $crop_name, $crop_status, $last_update, $latitude, $longitude);
+            $stmt = $conn->prepare("INSERT INTO farmer_acc (farmer_n, age, sex, farm_n, area, barangay, fcontact, crop_name, crop_status, latitude, longitude, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssssssssss", $farmer_n, $age, $sex, $farm_n, $area, $barangay, $fcontact, $crop_name, $crop_status, $latitude, $longitude, $last_update);
 
             if ($stmt->execute()) {
                 header('location:admin_page.php');
@@ -207,19 +207,18 @@ h2 {
         transition: background-color 0.2s ease-in-out;
         }
 
-    .btn-search {
-        width: 15%;
-        padding: 5px;
-        border: none;
-        border-radius: 1px;
-        color: #fff;
-        font-size: 16px; /* Adjust font size as needed */
-        cursor: pointer;
-        text-decoration: none; /* Remove underline for Cancel link */
-        display: inline-block; /* Adjust display */
-        text-align: center;
-        transition: background-color 0.2s ease-in-out;
-        }
+/* Styles for the search button */
+.btn-search {
+    display: inline-block;
+    padding: 1px 11px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #5cb85c; /* Bootstrap's btn-success color */
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
 
         .btn-search {
             background-color: #28a745; /* Green color for Submit button */
@@ -240,15 +239,19 @@ h2 {
             background-color: #218838; /* Darker shade for hover effect */
         }
 
+        .btn-search:hover {
+            background-color: #218838; /* Darker shade for hover effect */
+        }
+
+        .btn-cancel:hover {
+            background-color: #BE4643; /* Darker shade for hover effect */
+        }
+        
 .btn-submit,
 .btn-cancel,
 .btn-search {
     margin-left: 10px; /* Add space between buttons */
 }
-
-        .btn-cancel:hover {
-            background-color: #BE4643; /* Darker shade for hover effect */
-        }
 
         /* Additional styles for the button wrapper */
 .button-wrapper {
@@ -427,11 +430,11 @@ h2 {
     </div>
 </div>
 
-<!-- Map
-<div id="map" style="height: 400px; width: 100%;"></div>
+
+<div>
 <input type="hidden" name="latitude" id="latitude">
 <input type="hidden" name="longitude" id="longitude">
-    </div> -->
+    </div>
 </div>
 </div>
         </form>

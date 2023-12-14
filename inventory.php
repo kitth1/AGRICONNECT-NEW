@@ -60,6 +60,10 @@ h2 {
     background-color: #f2f2f2;
 }
 
+.table tr:hover {
+    background-color: #ddd; /* Lighter grey background when hovered */
+}
+
 /* Form Styles */
 .form-control {
     width: 100%;
@@ -121,6 +125,15 @@ select.form-control {
 }
 
 .cancel-btn:hover {
+    background-color: #d32f2f; /* Darker red */
+}
+
+.delete-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.delete-btn:hover {
     background-color: #d32f2f; /* Darker red */
 }
 
@@ -196,6 +209,7 @@ select.form-control {
                         <td>$row[date]</td>
                         <td>
                         <a class='form-btn submit-btn' href='/AgriConnectN/update_inventory.php?ID=$row[ID]'> Update </a>
+                        <a class='btn delete-btn' href='/AgriConnectN/delete_report.php?ID={$row["ID"]}'>Delete</a>
                         </td>
                     </tr>
                         ";

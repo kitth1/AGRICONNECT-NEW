@@ -20,7 +20,7 @@
     $confirm_pass="";
 
     $errorMessage = "";
-    $successMasage = "";
+    $successMessage = "";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -65,8 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     if ($result->num_rows > 0) {
                         // Account already exists for this barangay
-                        $errorMessage = "A technician account already exists for the barangay:" . $tdesignation;
+                        $errorMessage = "A technician account already exists for the barangay: " . $tdesignation;
                     } else {
+                        $successMessage = "Registered successfully!";
                         insertTechnician($conn, $tname, $age, $sex, $tcontact, $tdesignation, $role, $tech_username, $password, $confirm_pass);
                     }
                     $checkStmt->close();
@@ -88,8 +89,9 @@ function insertTechnician($conn, $tname, $age, $sex, $tcontact, $tdesignation, $
     $stmt->bind_param("sssssssss", $tname, $age, $sex, $tcontact, $tdesignation, $role, $tech_username, $password, $confirm_pass);
 
     if ($stmt->execute()) {
-        header('location:user_profile.php');
-        exit;
+        echo "<script>alert('Registered successfully!');</script>";
+        // Reset the form values
+        $GLOBALS['tname'] = $GLOBALS['age'] = $GLOBALS['sex'] = $GLOBALS['tcontact'] = $GLOBALS['tdesignation'] = $GLOBALS['role'] = $GLOBALS['tech_username'] = $GLOBALS['password'] = $GLOBALS['confirm_pass'] = "";
     } else {
         global $errorMessage;
         $errorMessage = "Error: " . $stmt->error;
@@ -199,7 +201,7 @@ select.form-control:focus {
 }
 
 .table th {
-    background-color: #4CAF50; /* Green background for headers */
+    background-color: #006400; /* Green background for headers */
     color: white; /* White text for headers */
     padding: 10px; /* Spacing within header cells */
     border: 1px solid #ddd; /* Light border for definition */
@@ -278,10 +280,64 @@ select.form-control:focus {
   color: white;
 }
 
+.error-message {
+    color: #D8000C; /* A bright red color for attention */
+    background-color: #FFD2D2; /* Light red background */
+    border: 1px solid #D8000C;
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 10px; /* Ample padding for better visibility */
+    margin-bottom: 10px; /* Space below the message */
+    font-size: 13px; /* Slightly larger font for readability */
+    text-align: center; /* Center the text inside */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    gap: 1px; /* Space between icon and text */
+}
+
+.error-message:before {
+    content: "\26A0"; /* Unicode character for a warning sign */
+    font-size: 20px; /* Slightly larger icon size */
+    display: inline-block; /* Ensure it's in line with the text */
+}
+
 @media (max-width: 768px) {
 .dashboard-container {
     flex-direction: column;
 }
+
+.error-message {
+        font-size: 14px; /* Smaller font on mobile devices */
+        padding: 8px 15px; /* Slightly less padding on small screens */
+    }
+    .success-message {
+    color: #155724; /* Dark green text for contrast and readability */
+    background-color: #d4edda; /* Light green background */
+    border: 1px solid #c3e6cb; /* Light green border for subtle emphasis */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    padding: 10px 20px; /* Padding for content spacing */
+    margin-bottom: 20px; /* Bottom margin to separate from other content */
+    font-size: 16px; /* Font size for readability */
+    text-align: center; /* Center align the text */
+    display: flex; /* Use flex for layout */
+    align-items: center; /* Center align items vertically */
+    gap: 10px; /* Gap between icon and text */
+}
+
+.success-message:before {
+    content: "\2714"; /* Unicode character for a checkmark */
+    font-size: 20px; /* Slightly larger icon size */
+    display: inline-block; /* Ensure it's in line with the text */
+    color: #28a745; /* A vibrant green color for the icon */
+}
+
+@media (max-width: 768px) {
+    .success-message {
+        font-size: 14px; /* Smaller font size on mobile devices */
+        padding: 8px 15px; /* Adjust padding for smaller screens */
+    }
+}
+
+
 
 .form-container, .table-container {
     width: 100%;

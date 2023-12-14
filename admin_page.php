@@ -192,6 +192,7 @@ body, html {
     text-decoration: none;
     margin-right: 5px;
 }
+
 /* Additional hover effect for buttons */
 .btn:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
