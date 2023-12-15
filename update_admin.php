@@ -264,11 +264,10 @@ h2 {
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">sex</label>
                 <div class="col-sm-6">
-                <select name="sex" class="form-control" required>
-            <option value="">Choose sex</option>
-            <option value="male" <?php echo ($sex == 'male') ? 'selected' : ''; ?>>male</option>
-            <option value="female" <?php echo ($sex == 'female') ? 'selected' : ''; ?>>female</option>
-        </select><br><br>
+                <select name="sex" class="form-control" required value="<?php echo $sex; ?>"><br>
+                    <option value="male"> male </option>
+                    <option value="female"> female </option>
+                        </select><br>
                 </div> 
             </div>
             <div class="row mb-3">
@@ -287,12 +286,11 @@ h2 {
                 <label class="col-sm-3 col-form-label">Barangay</label>
                 <div class="col-sm-6">
                 <select name="barangay" class="form-control"  required value="<?php echo $barangay; ?>"><br>
-                <option value="">Choose Barangay</option>
-            <option value="Agusipan" <?php echo ($barangay == 'Agusipan') ? 'selected' : ''; ?>>Agusipan</option>
-            <option value="Agutayan" <?php echo ($barangay == 'Agutayan') ? 'selected' : ''; ?>>Agutayan</option>
-            <option value="Bagumbayan" <?php echo ($barangay == 'Bagumbayan') ? 'selected' : ''; ?>>Bagumbayan</option>
-            <option value="Balabag" <?php echo ($barangay == 'Balabag') ? 'selected' : ''; ?>>Balabag</option>
-            <option value="Ban-ag" <?php echo ($barangay == 'Ban-ag') ? 'selected' : ''; ?>>Ban-ag</option>
+                    <option value="Agusipan"> Agusipan </option>
+                    <option value="Agutayan"> Agutayan </option>
+                    <option value="Bagumbayan"> Bagumbayan </option>
+                    <option value="Balabag"> Balabag </option>
+                    <option value="Ban-ag"> Ban-ag </option>
                         </select><br>
                 </div> 
             </div>
@@ -302,45 +300,44 @@ h2 {
                 <input type="text" class="form-control" name="fcontact" required  value="<?php echo $fcontact; ?>">
                 </div> 
             </div>
-                    <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Crop Name</label>
-            <div class="col-sm-6">
-            <select name="crop_name" class="form-control">
-                    <option value="">Select crop name</option>
-                    <option value="Eggplant" <?php echo ($crop_name == 'Eggplant') ? 'selected' : ''; ?>>Eggplant (Talong)</option>
-                    <option value="Bitter Gourd" <?php echo ($crop_name == 'Bitter Gourd') ? 'selected' : ''; ?>>Bitter Gourd (Ampalaya)</option>
-                    <option value="Okra" <?php echo ($crop_name == 'Okra') ? 'selected' : ''; ?>>Okra</option>
-                    <option value="Rice" <?php echo ($crop_name == 'Rice') ? 'selected' : ''; ?>>Rice (Bigas)</option>
-                    <option value="Corn" <?php echo ($crop_name == 'Corn') ? 'selected' : ''; ?>>Corn (Mais)</option>
-                    <option value="String Beans" <?php echo ($crop_name == 'String Beans') ? 'selected' : ''; ?>>String Beans (Sitaw)</option>
-                    <option value="Squash" <?php echo ($crop_name == 'Squash') ? 'selected' : ''; ?>>Squash (Kalabasa)</option>
-                    <option value="Sweet Potato" <?php echo ($crop_name == 'Sweet Potato') ? 'selected' : ''; ?>>Sweet Potato (Kamote)</option>
-                    <option value="Tomato" <?php echo ($crop_name == 'Tomato') ? 'selected' : ''; ?>>Tomato</option>
-                    <option value="Peppers" <?php echo ($crop_name == 'Peppers') ? 'selected' : ''; ?>>Peppers (Sili)</option>
-                    <option value="Cabbage" <?php echo ($crop_name == 'Cabbage') ? 'selected' : ''; ?>>Cabbage (Repolyo)</option>
-                    <option value="Onion" <?php echo ($crop_name == 'Onion') ? 'selected' : ''; ?>>Onion (Sibuyas)</option>
-                    <option value="Garlic" <?php echo ($crop_name == 'Garlic') ? 'selected' : ''; ?>>Garlic (Bawang)</option>
-                    <option value="Grapes" <?php echo ($crop_name == 'Grapes') ? 'selected' : ''; ?>>Grapes (Ubas)</option>
-                    <option value="Banana" <?php echo ($crop_name == 'Banana') ? 'selected' : ''; ?>>Banana (Saging)</option>
-                    <option value="Papaya" <?php echo ($crop_name == 'Papaya') ? 'selected' : ''; ?>>Papaya</option>
-                    <option value="Strawberry" <?php echo ($crop_name == 'Strawberry') ? 'selected' : ''; ?>>Strawberry</option>
-                    <option value="Melon" <?php echo ($crop_name == 'Melon') ? 'selected' : ''; ?>>Melon</option>
-                </select><br>
-            </div>  
-             </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Crop Name</label>
+                <div class="col-sm-6">
+                <select name="crop_name" class="form-control"  value="<?php echo $crop_name; ?>"><br>
+                <option value=""> select crop name </option>
+                    <option value="Eggplant"> Eggplant (Talong) </option>
+                    <option value="Bitter Gourd"> Bitter Gourd (Ampalaya) </option>
+                    <option value="Okra"> Okra </option>
+                    <option value="Rice"> Rice (Bigas) </option>
+                    <option value="Corn"> Corn (Mais)</option>
+                    <option value="String Beans"> String Beans (Sitaw) </option>
+                    <option value="Squash"> Squash (Kalabasa)</option>
+                    <option value="Sweet Potato"> Sweet Potato (Kamote) </option>
+                    <option value="Tomato"> Tomato </option>
+                    <option value="Peppers"> Peppers (Sili) </option>
+                    <option value="Cabbage"> Cabbage (Repolyo) </option>
+                    <option value="Onion"> Onion (Sibuyas) </option>
+                    <option value="Garlic">Garlic (bawang) </option>
+                    <option value="Grapes"> Grapes (Ubas) </option>
+                    <option value="Banana"> Banana (Saging)</option>
+                    <option value="Papaya"> Papaya </option>
+                    <option value="Strawberry"> Strawberry </option>
+                    <option value="Melon"> Melon </option>
+                        </select><br>
+                </div>  
+            </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Crop Status</label>
                 <div class="col-sm-6">
-                    <select name="crop_status" class="form-control">
-                        <option value="seedling" <?php echo ($crop_status == 'seedling') ? 'selected' : ''; ?>>seedling</option>
-                        <option value="sprouting" <?php echo ($crop_status == 'sprouting') ? 'selected' : ''; ?>>sprouting</option>
-                        <option value="ripening" <?php echo ($crop_status == 'ripening') ? 'selected' : ''; ?>>ripening</option>
-                        <option value="harvesting" <?php echo ($crop_status == 'harvesting') ? 'selected' : ''; ?>>harvesting</option>
-                        <option value="withered" <?php echo ($crop_status == 'withered') ? 'selected' : ''; ?>>withered</option>
-                    </select><br>
+                <select name="crop_status" class="form-control"  value="<?php echo $crop_status; ?>"><br>
+                    <option value="seedling"> seedling </option>
+                    <option value="sprouting"> sprouting </option>
+                    <option value="ripening"> ripening </option>
+                    <option value="harvesting"> harvesting </option>
+                    <option value="withered"> withered </option>
+                        </select><br>
                 </div> 
             </div>
-
               <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Latest Update</label>
                 <div class="col-sm-6">

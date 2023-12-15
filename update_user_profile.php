@@ -120,7 +120,7 @@
         }
         $stmt->close();
     }
-
+    
     $conn->close();
     ?>
 <head>
@@ -300,16 +300,15 @@ h2 {
                 </div> 
             </div>
             <div class="row mb-3">
-    <label class="col-sm-3 col-form-label">Sex</label>
-    <div class="select-wrapper">
-        <select name="sex" class="form-control" required>
-            <option value="">Choose sex</option>
-            <option value="male" <?php echo ($sex == 'male') ? 'selected' : ''; ?>>male</option>
-            <option value="female" <?php echo ($sex == 'female') ? 'selected' : ''; ?>>female</option>
-        </select><br>
-    </div> 
-</div>
-
+                <label class="col-sm-3 col-form-label">sex</label>
+                <div class="select-wrapper">
+                <select name="sex" class="form-control" required value="<?php echo $sex; ?>"><br>
+                    <option value=""> choose sex </option>
+                    <option value="male"> male </option>
+                    <option value="female"> female </option>
+                        </select><br>
+                </div> 
+            </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Contact Number</label>
                 <div class="col-sm-6">
@@ -318,26 +317,27 @@ h2 {
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Barangay Designation</label>
-                <div class="col-sm-6">
+                <div class="select-wrapper">
                 <select name="tdesignation" class="form-control"  required value="<?php echo $tdesignation; ?>"><br>
-                <option value="">Choose Barangay</option>
-            <option value="Agusipan" <?php echo ($tdesignation == 'Agusipan') ? 'selected' : ''; ?>>Agusipan</option>
-            <option value="Agutayan" <?php echo ($tdesignation == 'Agutayan') ? 'selected' : ''; ?>>Agutayan</option>
-            <option value="Bagumbayan" <?php echo ($tdesignation == 'Bagumbayan') ? 'selected' : ''; ?>>Bagumbayan</option>
-            <option value="Balabag" <?php echo ($tdesignation == 'Balabag') ? 'selected' : ''; ?>>Balabag</option>
-            <option value="Ban-ag" <?php echo ($tdesignation == 'Ban-ag') ? 'selected' : ''; ?>>Ban-ag</option>
+                    <option value=""> choose barangay </option>
+                    <option value="Agusipan"> Agusipan </option>
+                    <option value="Agutayan"> Agutayan </option>
+                    <option value="Bagumbayan"> Bagumbayan </option>
+                    <option value="Balabag"> Balabag </option>
+                    <option value="Ban-ag"> Ban-ag </option>
                         </select><br>
                 </div> 
             </div>
             <div class="row mb-3">
-    <label class="col-sm-3 col-form-label">Sex</label>
-    <div class="select-wrapper">
-        <select name="role" class="form-control" required>
-            <option value="">Choose sex</option>
-            <option value="admin" <?php echo ($role == 'admin') ? 'selected' : ''; ?>>admin</option>
-            <option value="technician" <?php echo ($role == 'technician') ? 'selected' : ''; ?>>technician</option>
-        </select><br>
-    </div> 
+                <label class="col-sm-3 col-form-label">Role</label>
+                <div class="select-wrapper">
+                <select name="role" class="form-control"  required value="<?php echo $role; ?>"><br>
+                    <option value=""> choose role </option>
+                    <option value="admin"> Admin </option>
+                    <option value="technician"> Technician </option>
+                        </select><br>
+                </div> 
+            </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">User Name</label>
                 <div class="col-sm-6">

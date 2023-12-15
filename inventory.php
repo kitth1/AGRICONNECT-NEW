@@ -240,22 +240,16 @@ select.form-control {
     $errorMessage = "";
     $successMasage = "";
 
-    // Fetch farmer names from the farmer_acc table
-    $farmerNames = array();
-    $sqlFarmer = "SELECT farmer_n FROM farmer_acc";
-    $resultFarmer = $conn->query($sqlFarmer);
-    if ($resultFarmer->num_rows > 0) {
-        while($rowFarmer = $resultFarmer->fetch_assoc()) {
-            $farmerNames[] = $rowFarmer['farmer_n'];
-        }
-    }
+    // ... (previous code)
 
-    // Handling form submission
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $fname = $_POST["fname"];
-        $cropseed_n = $_POST["cropseed_n"];
-        $quantity = $_POST["quantity"];
-        $date = $_POST["date"];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $fname= $_POST["fname"];
+    $cropseed_n= $_POST["cropseed_n"];
+    $quantity= $_POST["quantity"];
+    $date= $_POST["date"];
+
+    // ... (rest of the POST data fetching)
 
     if ( empty($fname) || empty($cropseed_n) || empty($quantity) || empty($date))  {
         echo "ALL the fields are required";
@@ -293,16 +287,9 @@ $conn->close();
 
         <form method="POST">
         <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Farmer Name</label>
+                <label class="col-sm-3 col-form-label">Farmer Name</label>
                 <div class="col-sm-6">
-                    <select name="fname" class="form-control" required>
-                        <option value="">Select Farmer Name</option>
-                        <?php foreach ($farmerNames as $farmerName): ?>
-                            <option value="<?php echo htmlspecialchars($farmerName); ?>">
-                                <?php echo htmlspecialchars($farmerName); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                <input type="text" class="form-control" name="fname" required placeholder="Last, First, Initial" value="<?php echo $fname; ?>">
                 </div> 
             </div>
             <div class="row mb-3">

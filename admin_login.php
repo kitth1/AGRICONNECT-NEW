@@ -1,54 +1,41 @@
 <?php
     include_once("conn.php");
-    session_start();
-    $login_error = '';
+    $login_error = ''; // Initialize an error message variable
 
-    if(isset($_POST['submit'])) {
-        $tech_username = mysqli_real_escape_string($conn, $_POST['tech_username']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
-        $tdesignation = mysqli_real_escape_string($conn, $_POST['tdesignation']);
+if(isset($_POST['submit'])){
 
-        $select = "SELECT * FROM tech_acc WHERE tech_username = '$tech_username' AND password = '$password'";
-        $result = mysqli_query($conn, $select);
+    $tech_username = mysqli_real_escape_string($conn, $_POST['tech_username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-        if(mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
+    $select = "SELECT * FROM tech_acc WHERE tech_username = '$tech_username' && password = '$password'";
 
-            if($row['role'] == 'admin') {
-                $_SESSION['admin_name'] = $row['tech_username'];
-                header('location:admin_page.php');
-            } elseif ($row['role'] == 'technician' && $row['tdesignation'] == $tdesignation) {
-                $_SESSION['tech_username'] = $row['tech_username'];
-                $_SESSION['tdesignation'] = $row['tdesignation'];
+    $result = mysqli_query($conn, $select);
 
-                // Redirect based on barangay designation
-                $redirectPage = match ($row['tdesignation']) {
-                    'Agusipan' => 'Agusipan_page.php',
-                    'Agutayan' => 'Agutayan_page.php',
-                    'Bagumbayan' => 'Bagumbayan_page.php',
-                    'Balabag' => 'Balabag_page.php',
-                    'Ban-ag' => 'Ban-ag_page.php',
-                    default => ''
-                };
+    if(mysqli_num_rows($result) > 0 ){
+        
+            $row = mysqli_fetch_array($result);
 
-                if ($redirectPage) {
-                    header("location:$redirectPage");
-                } else {
-                    $login_error = "Invalid barangay designation!";
-                }
-            } else {
-                $login_error = "Invalid account!";
-            }
-        } else {
-            $login_error = "Invalid username or password!";
+        if($row['role'] =='admin'){
+            $_SESSION['admin_name'] = $row['tech_username'];
+            header('location:admin_page.php');
+            
         }
-    }
-?>
+        }   
+    else{
+        $login_error = "not valid username or password!";
+        }
 
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-<style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+
+    <style>
         /* Style for header image */
         #header-image {
             width: 100px; /* Adjust as needed */
@@ -129,17 +116,6 @@ input[type="submit"]:hover {
     background: #45a049; /* Darker green on hover */
 }
 
-input[type="text"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box; /* Add box-sizing */
-        }
-
 a {
     color: #4CAF50; /* Green color for links */
     text-decoration: none;
@@ -166,41 +142,32 @@ a:hover {
 }
 
     </style>
-
-<head>
-    <!-- [Your existing head content] -->
-    <title>Login Form</title>
-    <!-- [Your existing CSS styles] -->
 </head>
 <body>
-    <div class="form-container">
-        <form action="" method="POST">
-            <h1> AgriConnect </h1>
-            <p>Connecting Farmers and Buyers</p>
+    <div class = "form-container">
+        <!-- Header Image -->
+    <img id="header-image" src="https://www.dropbox.com/scl/fi/dtpki3lvopthxbikadj2i/agri_icon.jpg?rlkey=clwb9ju08mx3yu56ljhwixox5&dl=1" alt="Header Image">
 
-            <div class="error-msg"><?php echo $login_error; ?></div>
+    <form action="" method="POST">
+         <h1> AgriConnect </h1>
+            <p>Connecting Farmers and Buyers </p>
 
-            <label>USER NAME: </label>
-            <input type="text" name="tech_username" required placeholder="Enter username"><br>
+        <?php 
+        if(isset($error)){
+            foreach($error as $error){
+                echo '<span class="error-msg">'. $error. '</span>';
+            };
+        };
+        ?>
+        <label>USER NAME: </label>
+        <input type="text" name="tech_username" required placeholder="enter username"><br>
 
-            <label>PASSWORD: </label>
-            <input type="password" name="password" required placeholder="Enter password"><br>
+        <label>PASSWORD: </label>
+        <input type="password" name="password" required placeholder="enter password"><br>
+        <div class="error-msg"><?php echo $login_error; ?></div> <!-- Display error message here -->
 
-
-            <label>Barangay Designation: </label>
-            <select name="tdesignation" required>
-                <option value="">Select Barangay</option>
-                <option value="Agusipan">Agusipan</option>
-                <option value="Agutayan">Agutayan</option>
-                <option value="Bagumbayan">Bagumbayan</option>
-                <option value="Balabag">Balabag</option>
-                <option value="Ban-ag">Ban-ag</option>
-                
-            </select><br>
-
-            <input type="submit" name="submit" value="Login now" class="form-btn"><br><br>
-            <p> <a href="front_page.html" class="btn">Go Back To Agri Map</a></p>
-        </form>
-    </div>
+        <input type="submit" name="submit" value="Login now" class="form-btn"><br><br>
+        <p>Login as Technician <a href="tech_login.php" class="btn">Click Here </a></p>
+        <p> <a href="front_page.html" class="btn">Go Back To Agri Map</a></p>
 </body>
 </html>

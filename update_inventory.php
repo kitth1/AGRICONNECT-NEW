@@ -127,7 +127,6 @@
 
         } while (true);
     }
-    
 ?>
 
 <head>
@@ -328,31 +327,32 @@ select.form-control {
                 </div> 
             </div>
             <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Crop Name</label>
-            <div class="col-sm-6">
-            <select name="crop_name" class="form-control">
-                    <option value="">Select crop name</option>
-                    <option value="Eggplant" <?php echo ($crop_name == 'Eggplant') ? 'selected' : ''; ?>>Eggplant (Talong)</option>
-                    <option value="Bitter Gourd" <?php echo ($crop_name == 'Bitter Gourd') ? 'selected' : ''; ?>>Bitter Gourd (Ampalaya)</option>
-                    <option value="Okra" <?php echo ($crop_name == 'Okra') ? 'selected' : ''; ?>>Okra</option>
-                    <option value="Rice" <?php echo ($crop_name == 'Rice') ? 'selected' : ''; ?>>Rice (Bigas)</option>
-                    <option value="Corn" <?php echo ($crop_name == 'Corn') ? 'selected' : ''; ?>>Corn (Mais)</option>
-                    <option value="String Beans" <?php echo ($crop_name == 'String Beans') ? 'selected' : ''; ?>>String Beans (Sitaw)</option>
-                    <option value="Squash" <?php echo ($crop_name == 'Squash') ? 'selected' : ''; ?>>Squash (Kalabasa)</option>
-                    <option value="Sweet Potato" <?php echo ($crop_name == 'Sweet Potato') ? 'selected' : ''; ?>>Sweet Potato (Kamote)</option>
-                    <option value="Tomato" <?php echo ($crop_name == 'Tomato') ? 'selected' : ''; ?>>Tomato</option>
-                    <option value="Peppers" <?php echo ($crop_name == 'Peppers') ? 'selected' : ''; ?>>Peppers (Sili)</option>
-                    <option value="Cabbage" <?php echo ($crop_name == 'Cabbage') ? 'selected' : ''; ?>>Cabbage (Repolyo)</option>
-                    <option value="Onion" <?php echo ($crop_name == 'Onion') ? 'selected' : ''; ?>>Onion (Sibuyas)</option>
-                    <option value="Garlic" <?php echo ($crop_name == 'Garlic') ? 'selected' : ''; ?>>Garlic (Bawang)</option>
-                    <option value="Grapes" <?php echo ($crop_name == 'Grapes') ? 'selected' : ''; ?>>Grapes (Ubas)</option>
-                    <option value="Banana" <?php echo ($crop_name == 'Banana') ? 'selected' : ''; ?>>Banana (Saging)</option>
-                    <option value="Papaya" <?php echo ($crop_name == 'Papaya') ? 'selected' : ''; ?>>Papaya</option>
-                    <option value="Strawberry" <?php echo ($crop_name == 'Strawberry') ? 'selected' : ''; ?>>Strawberry</option>
-                    <option value="Melon" <?php echo ($crop_name == 'Melon') ? 'selected' : ''; ?>>Melon</option>
-                </select><br>
-            </div>  
-             </div>
+                <label class="col-sm-3 col-form-label">Crop / Seed Name</label>
+                <div class="col-sm-6">
+                <div class="select-wrapper">
+                <select name="cropseed_n" class="form=control"  value="<?php echo $cropseed_n; ?>"><br>
+                <option value=""> select crop name </option>
+                    <option value="Eggplant"> Eggplant (Talong) </option>
+                    <option value="Bitter Gourd"> Bitter Gourd (Ampalaya) </option>
+                    <option value="Okra"> Okra </option>
+                    <option value="Rice"> Rice (Bigas) </option>
+                    <option value="Corn"> Corn (Mais)</option>
+                    <option value="String Beans"> String Beans (Sitaw) </option>
+                    <option value="Squash"> Squash (Kalabasa)</option>
+                    <option value="Sweet Potato"> Sweet Potato (Kamote) </option>
+                    <option value="Tomato"> Tomato </option>
+                    <option value="Peppers"> Peppers (Sili) </option>
+                    <option value="Cabbage"> Cabbage (Repolyo) </option>
+                    <option value="Onion"> Onion (Sibuyas) </option>
+                    <option value="Garlic">Garlic (bawang) </option>
+                    <option value="Grapes"> Grapes (Ubas) </option>
+                    <option value="Banana"> Banana (Saging)</option>
+                    <option value="Papaya"> Papaya </option>
+                    <option value="Strawberry"> Strawberry </option>
+                    <option value="Melon"> Melon </option>
+                        </select><br>
+                </div> 
+            </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Quantity</label>
                 <div class="col-sm-6">

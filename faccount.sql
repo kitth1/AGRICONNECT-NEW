@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2023 at 11:16 PM
+-- Generation Time: Dec 11, 2023 at 11:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -182,6 +182,14 @@ CREATE TABLE `distribute` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `distribute`
+--
+
+INSERT INTO `distribute` (`ID`, `fname`, `cropseed_n`, `quantity`, `date`) VALUES
+(1, 'Bolences John Arvie S', 'Papaya', '100', '2023-10-14'),
+(2, 'faro', 'Corn', '50', '2023-11-18');
+
 -- --------------------------------------------------------
 
 --
@@ -201,20 +209,24 @@ CREATE TABLE `farmer_acc` (
   `crop_status` varchar(255) NOT NULL DEFAULT 'sprouting',
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,
-  `last_update` date DEFAULT NULL,
-  `fname` varchar(255) NOT NULL,
-  `cn_recieved` varchar(255) NOT NULL,
-  `quantity` int(255) NOT NULL,
-  `date_distri` date DEFAULT NULL
+  `last_update` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `farmer_acc`
 --
 
-INSERT INTO `farmer_acc` (`ID`, `farmer_n`, `age`, `sex`, `farm_n`, `area`, `barangay`, `fcontact`, `crop_name`, `crop_status`, `latitude`, `longitude`, `last_update`, `fname`, `cn_recieved`, `quantity`, `date_distri`) VALUES
-(32, 'bolences', '21', 'male', 'e2', 2, 'Bagumbayan', '886575463456', 'Tomato', 'harvesting', 10.809798706093805, 122.56159248049846, '2023-12-15', '', '', 0, NULL),
-(33, 'faro', '22', 'male', 'ricee', 2, 'Agutayan', '09687847321', 'Banana', 'ripening', 10.813067031799292, 122.54320853128888, '2023-12-22', '', '', 0, NULL);
+INSERT INTO `farmer_acc` (`ID`, `farmer_n`, `age`, `sex`, `farm_n`, `area`, `barangay`, `fcontact`, `crop_name`, `crop_status`, `latitude`, `longitude`, `last_update`) VALUES
+(11, 'bolences', '22', 'male', 'rice gran', 140, 'Agusipan', '09388732118', 'Rice', 'sprouting', NULL, NULL, '2023-12-07'),
+(12, 'toledo', '22', 'male', 'melon farm', 0, 'Agutayan', '093452456432', 'water melon', 'harvesting', NULL, NULL, NULL),
+(13, 'degobatun', '23', 'male', 'sugar farm', 0, 'Bagumbayan', '09475837261', 'sugar cane', 'sprouting', NULL, NULL, NULL),
+(14, 'gelilang', '22', 'male', 'egplantation', 0, 'Balabag', '09856362718', 'eggplant', 'ripening', NULL, NULL, NULL),
+(15, 'faro', '22', 'male', 'corn farm', 500, 'Agusipan', '09687847321', 'Rice', 'withered', NULL, NULL, NULL),
+(16, 'gardose', '23', 'male', 'rice land', 0, 'Balabag', '09576847326', 'rice', 'harvesting', NULL, NULL, NULL),
+(17, 'batong bakal', '40', 'male', 'batong bakal farm', 367, 'Agusipan', '09388732118', 'rice', 'sprouting', NULL, NULL, NULL),
+(18, 'faro', '40', 'male', 'cropper', 345, 'Ban-ag', '09856362718', 'Tomato', 'sprouting', NULL, NULL, NULL),
+(19, 'auifhansivh', '34', 'female', 'jioghasuibh', 299, 'Balabag', '09375837462', 'Papaya', 'seedling', NULL, NULL, NULL),
+(20, 'Bolences', '23', 'male', 'FARMERE', 324, 'Ban-ag', '0953467389', 'Banana', 'withered', NULL, NULL, '2023-12-09');
 
 -- --------------------------------------------------------
 
@@ -240,8 +252,9 @@ CREATE TABLE `tech_acc` (
 --
 
 INSERT INTO `tech_acc` (`ID`, `tname`, `age`, `sex`, `tcontact`, `tdesignation`, `role`, `tech_username`, `password`, `confirm_pass`) VALUES
-(24, 'default', '1', 'male', '0987564432', 'Agusipan', 'admin', 'admin', 'admin', 'admin'),
-(25, 'gimo', '22', 'female', '09388732118', 'Agutayan', 'technician', 'gimo', '123', '123');
+(21, 'gimo', '22', 'male', '0986545453', 'Agusipan', 'admin', 'admin', 'admin', 'admin'),
+(22, 'bolences', '23', 'male', '09786753821', 'Agusipan', 'technician', 'arvie', '12345', '12345'),
+(23, 'gardose', '40', 'male', '09576847392', 'Agutayan', 'technician', 'gardose', '12345', '12345');
 
 --
 -- Indexes for dumped tables
@@ -363,13 +376,13 @@ ALTER TABLE `distribute`
 -- AUTO_INCREMENT for table `farmer_acc`
 --
 ALTER TABLE `farmer_acc`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tech_acc`
 --
 ALTER TABLE `tech_acc`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
