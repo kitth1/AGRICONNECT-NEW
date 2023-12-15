@@ -183,92 +183,100 @@ body, html {
 </html>
 
 <?php
-     $servername = "localhost";
-     $username = "root";
-     $password = "";
-     $dbname = "faccount";
- 
-     $conn = new mysqli($servername, $username, $password, $dbname);
+    include_once("conn.php");
+    session_start();
 
-    $ID="";
-    $farm_name="";
-    $week_report="";
-    $date="";
-
+    $farm_name = "";
+    $week_report = "";
+    $date = "";
     $errorMessage = "";
-    $successMasage = "";
+    $successMessage = "";
 
-    // ... (previous code)
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $farm_name= $_POST["farm_name"];
-    $week_report= $_POST["week_report"];
-    $date= $_POST["date"];
-
-
-    if ( empty($farm_name) || empty($week_report) || empty($date))  {
-        echo "ALL the fields are required";
-    } else {
-
-        $stmt = $conn->prepare("INSERT INTO agutayan_report (farm_name, week_report, date) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $farm_name, $week_report, $date);
-    
-        if ($stmt->execute()) {
-            header('location:Agutayan_report.php');
-            exit;
-        } else {
-            echo "Error: " . $stmt->error;
+    // Fetch farm names from Agutayan barangay
+    $farmNames = array();
+    $sql = "SELECT farm_n FROM farmer_acc WHERE barangay = 'Agutayan'";
+    $result = $conn->query($sql);
+    if ($result && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $farmNames[] = $row['farm_n'];
         }
-
-        $stmt->close();
-    }
     }
 
-$conn->close();
+    // Handle form submission
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $farm_name = $_POST["farm_name"];
+        $week_report = $_POST["week_report"];
+        $date = $_POST["date"];
 
+        if (empty($farm_name) || empty($week_report) || empty($date)) {
+            $errorMessage = "All fields are required.";
+        } else {
+            $stmt = $conn->prepare("INSERT INTO agutayan_report (farm_name, week_report, date) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $farm_name, $week_report, $date);
+            if ($stmt->execute()) {
+                $successMessage = "Report added successfully!";
+                header('location:Agutayan_report.php');
+                exit;
+            } else {
+                $errorMessage = "Error: " . $stmt->error;
+            }
+            $stmt->close();
+        }
+    }
+
+    $conn->close();
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add to inventory</title>
+    <title>Add to Week Report</title>
 </head>
 <body>
-    <div class="container my-5">
+    <div class="container">
         <h2>Add Weekly Report</h2>
-
-
+        <?php
+        if (!empty($errorMessage)) {
+            echo "<p style='color:red;'>$errorMessage</p>";
+        }
+        if (!empty($successMessage)) {
+            echo "<p style='color:green;'>$successMessage</p>";
+        }
+        ?>
         <form method="POST">
-        <div class="row mb-3">
+            <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Farm Name</label>
                 <div class="col-sm-6">
-                <input type="text" class="form-control" name="farm_name" required placeholder="" value="<?php echo $farm_name; ?>">
+                    <select name="farm_name" class="form-control" required>
+                        <option value="">Select Farm Name</option>
+                        <?php foreach ($farmNames as $name): ?>
+                            <option value="<?php echo htmlspecialchars($name); ?>"><?php echo htmlspecialchars($name); ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div> 
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Week Report</label>
-                <div class="col-sm-6">
-                <input type="text" class="form-control" name="week_report" required placeholder="" value="<?php echo $week_report; ?>">
-                </div> 
+                <div class="col-sm-9">
+                    <textarea name="week_report" class="form-control" rows="4" required placeholder="Enter weekly report details"></textarea>
+                </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Date Reported</label>
                 <div class="col-sm-6">
-                <input type="date" class="form-control" name="date" required placeholder="" value="<?php echo $date; ?>">
+                    <input type="date" class="form-control" name="date" required>
                 </div> 
             </div>
-            <br>
             <div class="form-actions">
                 <button type="submit" class="btn btn-green">Submit</button>
                 <button type="button" class="btn btn-cancel" onclick="location.href='/AgriConnectN/Agutayan_page.php'">Cancel</button>
             </div>
-            </div>
         </form>
     </div>
-
 </body>
 </html>
 
