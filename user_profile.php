@@ -430,7 +430,7 @@ select.form-control:focus {
                 <div class="btn container">
                 <div class="offset-sm-3 col-sm-3 d-grid">
                 <input type="submit" name="submit" value="submit" class="btn form-btn">
-                    <a class="btn btn-cancel" href="/AgriConnectN/user_profile.php" role="button"> Cancel </a>
+                    <a class="btn btn-cancel" href="/AgriConnectN/user_profile.php" role="button"> Clear </a>
                     </div>
                 </div>
             </div>
