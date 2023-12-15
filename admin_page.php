@@ -227,7 +227,7 @@ body, html {
         <!-- Sidebar links -->
         <a href="user_profile.php">Register New Technician</a>
         <a href="/AgriConnectN/register_farmer.php">Register New Farmer</a>
-        <a href="/AgriConnectN/inventory.php">Check inventory</a>
+        <a href="/AgriConnectN/inventory.php">Check Inventory</a>
         <a href="/AgriConnectN/admin_map.html">Check AGRI MAP</a>
         <a href="/AgriConnectN/logout_form.php">Logout</a>
     </div>
